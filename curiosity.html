@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://raw.githubusercontent.com/nasa/data.nasa.gov/master/favicon.ico">
+
+    <title>NASA API</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!-- Icons -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.1/examples/album/album.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <!-- cabecera -->
+    <header>
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/2000px-NASA_logo.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          NASA API
+        </a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="foto_dia.html">Foto del Dia</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="curiosity.html">Rover Curiosity</a>
+            </li>
+            
+          </ul>
+        </div>
+        </nav>
+        
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <input type="text" id="textbuscar" placeholder="Buscar">
+            <button class="btn btn-outline-secondary my-2 my-sm-0" id="botonbuscar">Buscar</button>
+        </div>
+        <div id="google_translate_element"></div>
+      </nav>
+    </header>
+    <section id="contenido">
+
+      <nav aria-label="breadcrumb" id="migapan">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Rover Curiosity</li>
+          </ol>
+      </nav>
+
+      <div class="container">
+          <div class="row justify-content-end">
+            <div class="col-3">
+              <button type="button" class="btn btn-secondary">
+                  Pagina <span class="badge badge-light" id="numpag"></span> de <span class="badge badge-light">35</span> 
+              </button>
+              <button type="button" class="btn btn-secondary">
+                  <span class="badge badge-light" id="btnatras" title="Atras"><</span>
+              </button>
+              <button type="button" class="btn btn-secondary">
+                  <span class="badge badge-light" id="btnsiguiente" title="Siguiente">></span>
+              </button>
+            </div>    
+          </div>
+        </div>
+
+      <div class="progress" id="loader">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+      </div>
+
+      <div class="album py-5 bg-light">
+          <div class="container">
+            <div class="row" id="rover">      
+          </div>    
+          </div>
+      </div>
+  </section>
+  <div class="container">
+    <div class="row justify-content-end">
+      <div class="col-3">
+        <button type="button" class="btn btn-secondary">
+            Pagina <span class="badge badge-light" id="numpagdos"></span> de <span class="badge badge-light">35</span> 
+        </button>
+        <button type="button" class="btn btn-secondary">
+            <span class="badge badge-light" id="btnatrasdos" title="Atras"><</span>
+        </button>
+        <button type="button" class="btn btn-secondary">
+            <span class="badge badge-light" id="btnsiguientedos" title="Siguiente">></span>
+        </button>
+      </div>    
+    </div>
+  </div>
+
+  <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="titulodetalle"></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img class="card-img" src="" alt="" id="imagendetalle">
+          <p id="detail"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="album py-5 bg-light">
+    <div class="container">
+      <p align="center">
+        <a href="http://clustercreatic.com/en/">
+          <img src="http://clustercreatic.com/static/images/icono-blanco.png" title="Creatic" width="50" height="30" class="d-inline-block align-top" alt="">
+        </a>
+        <a href="https://www.nasa.gov/">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/2000px-NASA_logo.svg.png" title="Nasa"class="d-inline-block align-top" width="30" height="30" alt="">
+        </a>
+        <a href="https://getbootstrap.com/">
+          <img src="https://fossies.org/linux/bootstrap/assets/img/bootstrap-stack.png" title="Bootstrap" width="30" height="30" class="d-inline-block align-top" alt="">
+        </a>
+        <a href="https://github.com/jairnet/jquery-api">
+          <i title="Github" class="fab fa-github-square fa-2x"></i>
+        </a>
+      </p>
+    </div>
+  </footer>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <script src="http://www.google.com/jsapi"></script>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="js/script-curiosity.js"></script>
+  </body>
+</html>
